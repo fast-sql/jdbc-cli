@@ -3,9 +3,12 @@ package top.fastsql.jdbccli;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Driver;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Scanner;
 
 /**
@@ -21,41 +24,58 @@ public class MainApp {
     private static JdbcTemplate jdbcTemplate = null;
 
     public static void main(String[] args) throws Exception {
-        String db;
-        while (true) {
-            System.out.print("[DataBase Type [o/m/p] (o-Oracle/m-Mysql/p-Postgresql )]: ");
-            Scanner scanner = new Scanner(System.in);
-            db = scanner.nextLine();
-            if ("o".equals(db)) {
-                driver = new oracle.jdbc.OracleDriver();
-                break;
-            } else if ("m".equals(db)) {
-                driver = new com.mysql.cj.jdbc.Driver();
-                break;
-            } else if ("p".equals(db)) {
-                driver = new org.postgresql.Driver();
-                break;
-            } else {
-                System.out.println("No this type");
+        System.out.print("Welcome jdbc-cli......");
+        System.out.print("Mode1-use properties file; Mode2-input. Input 1/2 (2) :");
+        String mode = new Scanner(System.in).nextLine().trim();
+        if ("1".equals(mode)) {
+            System.out.print("Input Config File Path (./config.properties) :");
+            String file = new Scanner(System.in).nextLine().trim();
+            Properties properties = new Properties();
+            properties.load(new FileInputStream(new File(file)));
+
+            System.out.print("Input Config File Id (db1) :");
+
+        } else if ("2".equals(mode)) {
+            String db;
+            while (true) {
+                System.out.print("Input DataBase Type o-Oracle/m-Mysql/p-Postgresql (p): ");
+                Scanner scanner = new Scanner(System.in);
+                db = scanner.nextLine();
+                if ("o".equals(db)) {
+                    driver = new oracle.jdbc.OracleDriver();
+                    break;
+                } else if ("m".equals(db)) {
+                    driver = new com.mysql.cj.jdbc.Driver();
+                    break;
+                } else if ("p".equals(db)) {
+                    driver = new org.postgresql.Driver();
+                    break;
+                } else {
+                    System.out.println("Type Error");
+                }
             }
+
+            System.out.print("[Short Jdbc Url ( eg. localhost:1522/dbname OR 192.168.0.202:1521:xe )]: ");
+            Scanner scanner = new Scanner(System.in);
+            String simpleUrl = scanner.next();
+            if ("o".equals(db)) {
+                url = "jdbc:oracle:thin:@{url}".replace("{url}", simpleUrl);
+            } else if ("m".equals(db)) {
+                url = "jdbc:mysql://{url}?useSsl=false".replace("{url}", simpleUrl);
+            } else if ("p".equals(db)) {
+                url = "jdbc:postgresql://{url}?stringtype=unspecified".replace("{url}", simpleUrl);
+            }
+
+            System.out.print("[Username] : ");
+            userName = new Scanner(System.in).nextLine().trim();
+
+            System.out.print("[Password] : ");
+            password = new Scanner(System.in).nextLine().trim();
+        } else {
+            System.out.println("Mode Error");
+            System.exit(0);
         }
 
-        System.out.print("[Short Jdbc Url ( eg. localhost:1522/dbname OR 192.168.0.202:1521:xe )]: ");
-        Scanner scanner = new Scanner(System.in);
-        String simpleUrl = scanner.next();
-        if ("o".equals(db)) {
-            url = "jdbc:oracle:thin:@{url}".replace("{url}", simpleUrl);
-        } else if ("m".equals(db)) {
-            url = "jdbc:mysql://{url}?useSsl=false".replace("{url}", simpleUrl);
-        } else if ("p".equals(db)) {
-            url = "jdbc:postgresql://{url}?stringtype=unspecified".replace("{url}", simpleUrl);
-        }
-
-        System.out.print("[Username] : ");
-        userName = new Scanner(System.in).nextLine().trim();
-
-        System.out.print("[Password] : ");
-        password = new Scanner(System.in).nextLine().trim();
 
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource(driver, url, userName, password);
         jdbcTemplate = new JdbcTemplate(dataSource);
