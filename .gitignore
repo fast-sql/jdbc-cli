@@ -1,2 +1,6 @@
 /.idea/
 *.iml
+*.class
+*.lst
+pom.properties
+original-jdbc-cli-1.0.jar

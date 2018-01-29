@@ -27,7 +27,7 @@ public class MainApp {
             Scanner scanner = new Scanner(System.in);
             db = scanner.nextLine();
             if ("o".equals(db)) {
-                driver = (Driver) Class.forName("oracle.jdbc.OracleDriver").newInstance();
+                driver = new oracle.jdbc.OracleDriver();
                 break;
             } else if ("m".equals(db)) {
                 driver = new com.mysql.cj.jdbc.Driver();

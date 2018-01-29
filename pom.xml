@@ -75,32 +75,25 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-                    <!--<descriptorRefs>-->
-                    <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
-                    <!--</descriptorRefs>-->
-                    <descriptor>package-full.xml</descriptor>
-                    <archive>
-                        <manifest>
-                            <mainClass>top.fastsql.jdbccli.MainApp</mainClass>
-                        </manifest>
-                    </archive>
-                    <finalName>jdbc-cli</finalName>
+                    <!-- put your configurations here -->
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
+
         </plugins>
     </build>
 </project>
