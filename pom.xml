@@ -38,31 +38,7 @@
 
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>maven-central</id>
-            <name>maven-central</name>
-            <url>http://zdht-cd.imwork.net:8686/repository/maven-central/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
 
-        <repository>
-            <id>maven-releases</id>
-            <name>maven-releases</name>
-            <url>http://zdht-cd.imwork.net:8686/repository/maven-releases/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
 
     <build>
         <plugins>
