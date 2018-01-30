@@ -41,4 +41,17 @@ username 为用户名
 password 为密码
 
 # 3.使用方式2
-使用命令行参数
+使用命令行参数,根据提示输入即可
+
+```
+Welcome jdbc-cli......
+Select Mode ~ Mode 1-Use properties file; Mode 2-Input Parameters. Input 1/2 (2) :2
+Input DataBase Type o-Oracle/m-Mysql/p-Postgresql (p): p
+[Jdbc Url (Also Can short style~ localhost:1522/dbname OR 192.168.0.202:1521:xe )]: localhost:5432/picasso-work
+[Username] : developer
+[Password] : password
+===========SUCCESS=========
+[INFO] jdbc:postgresql://localhost:5432/picasso-work?stringtype=unspecified  
+
+[Please input sql] : 
+```
