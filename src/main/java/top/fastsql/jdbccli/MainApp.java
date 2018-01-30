@@ -2,6 +2,7 @@ package top.fastsql.jdbccli;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,9 +51,19 @@ public class MainApp {
             if (!success) {
                 System.exit(0);
             }
-            setUrl((String) properties.get(id + "." + "url"));
+            String inUrl = (String) properties.get(id + "." + "url");
+            if (StringUtils.isEmpty(inUrl)) {
+                System.out.println("[id].url Is not set.");
+            }
+            setUrl(inUrl);
             userName = (String) properties.get(id + "." + "username");
+            if (StringUtils.isEmpty(userName)) {
+                System.out.println("[id].username Is not set.");
+            }
             password = (String) properties.get(id + "." + "password");
+            if (StringUtils.isEmpty(password)) {
+                System.out.println("[id].password Is not set.");
+            }
         } else {
             String db;
             while (true) {
