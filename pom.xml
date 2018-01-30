@@ -24,9 +24,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1.0</version>
+            <groupId>oracle</groupId>
+            <artifactId>oracle</artifactId>
+            <version>12</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -38,7 +38,31 @@
 
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <name>maven-central</name>
+            <url>http://zdht-cd.imwork.net:8686/repository/maven-central/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
 
+        <repository>
+            <id>maven-releases</id>
+            <name>maven-releases</name>
+            <url>http://zdht-cd.imwork.net:8686/repository/maven-releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
